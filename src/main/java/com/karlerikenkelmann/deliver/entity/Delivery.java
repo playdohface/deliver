@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,7 +27,8 @@ public class Delivery {
     @NotNull
     private LocalDateTime createdAt;
 
-    private LocalDateTime lastLocationChange;
+    @OneToMany(mappedBy = "delivery")
+    private List<TransitLog> logs;
 
     @ManyToOne
     private TransitLocation transitLocation;
