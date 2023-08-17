@@ -40,12 +40,12 @@ public class DeliveryService {
         delivery.setTransitLocation(location);
         transitLogRepository.save(new TransitLog(delivery, message));
         return Optional.of(deliveryRepository.save(delivery));
-
     }
 
     public Delivery update(Delivery delivery) {
         return this.deliveryRepository.save(resolveAddresses(delivery));
     }
+
     public void deliver(Integer id) {
         this.deliveryRepository.findById(id)
         .ifPresent(delivery -> {
