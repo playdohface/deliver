@@ -1,0 +1,17 @@
+<div class="card" *ngIf="delivery">
+
+<h2>Delivery No. {{delivery.id}}</h2>
+<h3>Status: {{delivery.status}}</h3>
+<h3>History</h3>
+<div *ngFor="let log of delivery.logs">
+  {{log.message}} - {{log.time | date:"medium"}}
+</div>
+
+
+<h3>Sender:</h3>
+<app-address-view [address]="delivery.sender"></app-address-view>
+<h3>Recipient:</h3>
+<app-address-view [address]="delivery.receiver"></app-address-view>
+</div>
+
+

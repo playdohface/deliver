@@ -1,0 +1,12 @@
+<div *ngIf="address else noAddress">
+{{address.firstName}}
+{{address.lastName}}<br>
+{{address.street}} <br>
+<span *ngIf="address.addressExtras">{{address.addressExtras}}<br></span>
+{{address.postalCode}}
+{{address.city}}<br>
+{{address.country}}
+</div>
+<ng-template #noAddress><p>NO ADDRESS<p></p></ng-template>
+
+

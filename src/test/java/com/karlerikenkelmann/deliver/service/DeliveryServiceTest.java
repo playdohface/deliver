@@ -29,6 +29,7 @@ class DeliveryServiceTest {
     private DeliveryService deliveryService;
     private AddressService addressService;
 
+    private TransitLogService transitLogService;
     private Address testAddr1;
     private Address testAddr2;
 
@@ -36,23 +37,22 @@ class DeliveryServiceTest {
     @BeforeEach
     void init() {
         this.addressService = new AddressService(addressRepository);
-        this.deliveryService = new DeliveryService(this.deliveryRepository,  transitLogRepository, addressService);
+        this.transitLogService = new TransitLogService(transitLogRepository);
+        this.deliveryService = new DeliveryService(this.deliveryRepository, transitLocationRepository,  addressService, transitLogService);
         this.testAddr1 = new Address();
         this.testAddr1.setFirstName("Test");
         this.testAddr1.setLastName("Test");
         this.testAddr1.setStreet("Foo");
-        this.testAddr1.setStreetNumber("1");
         this.testAddr1.setCity("New York");
-        this.testAddr1.setPostCode("1111");
+        this.testAddr1.setPostalCode("1111");
         this.testAddr1.setCountry(Country.ARGENTINA);
 
         this.testAddr2 = new Address();
         this.testAddr2.setFirstName("Test2");
         this.testAddr2.setLastName("Test2");
         this.testAddr2.setStreet("Foo2");
-        this.testAddr2.setStreetNumber("12");
         this.testAddr2.setCity("New York");
-        this.testAddr2.setPostCode("1111");
+        this.testAddr2.setPostalCode("1111");
         this.testAddr2.setCountry(Country.ARGENTINA);
 
         this.testLoc = new TransitLocation();

@@ -2,13 +2,14 @@ package com.karlerikenkelmann.deliver.service;
 
 import com.karlerikenkelmann.deliver.entity.Delivery;
 import com.karlerikenkelmann.deliver.entity.TransitLocation;
-import com.karlerikenkelmann.deliver.entity.TransitLog;
+import com.karlerikenkelmann.deliver.model.DeliveryRequest;
 import com.karlerikenkelmann.deliver.model.DeliveryStatus;
 import com.karlerikenkelmann.deliver.repository.DeliveryRepository;
-import com.karlerikenkelmann.deliver.repository.TransitLogRepository;
+import com.karlerikenkelmann.deliver.repository.TransitLocationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +17,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class DeliveryService {
     private DeliveryRepository deliveryRepository;
-    private TransitLogRepository transitLogRepository;
+    private TransitLocationRepository transitLocationRepository;
     private AddressService addressService;
+    private TransitLogService transitLogService;
 
     public List<Delivery> findAllActive() {
         return deliveryRepository.findAllActive();
@@ -33,12 +35,12 @@ public class DeliveryService {
 
     public Optional<Delivery> checkIn(Integer deliveryId, TransitLocation location, String message) {
         var found = deliveryRepository.findById(deliveryId);
-        if (found.isEmpty()){
+        if (found.isEmpty()) {
             return found;
         }
         var delivery = found.get();
         delivery.setTransitLocation(location);
-        transitLogRepository.save(new TransitLog(delivery, message));
+        transitLogService.log(delivery, message);
         return Optional.of(deliveryRepository.save(delivery));
     }
 
@@ -48,10 +50,27 @@ public class DeliveryService {
 
     public void deliver(Integer id) {
         this.deliveryRepository.findById(id)
-        .ifPresent(delivery -> {
-            delivery.setStatus(DeliveryStatus.DELIVERED);
-            deliveryRepository.save(delivery);
-        });
+                .ifPresent(delivery -> {
+                    delivery.setStatus(DeliveryStatus.DELIVERED);
+                    deliveryRepository.save(delivery);
+                });
+    }
+
+    public Optional<Delivery> createFromReq(DeliveryRequest deliveryRequest) {
+        var dropOff = this.transitLocationRepository.findById(deliveryRequest.getDropOffId());
+        if (dropOff.isEmpty()) {
+            return Optional.empty();
+        }
+        var drop = dropOff.get();
+        var delivery = new Delivery();
+        delivery.setSender(deliveryRequest.getSender());
+        delivery.setReceiver(deliveryRequest.getReceiver());
+        delivery.setStatus(DeliveryStatus.PENDING);
+        delivery.setTransitLocation(drop);
+        delivery.setCreatedAt(LocalDateTime.now());
+        var saved = deliveryRepository.save(resolveAddresses(delivery));
+        transitLogService.deliveryCreation(saved);
+        return Optional.of(saved);
     }
 
     public Delivery create(Delivery delivery) {
@@ -60,11 +79,11 @@ public class DeliveryService {
     }
 
     private Delivery resolveAddresses(Delivery delivery) {
-        if(delivery.getSender().getId() == null) {
+        if (delivery.getSender().getId() == null) {
             delivery.setSender(this.addressService.createOrFind(delivery.getSender()));
         }
-        if(delivery.getReceiver().getId() == null) {
-            delivery.setSender(this.addressService.createOrFind(delivery.getReceiver()));
+        if (delivery.getReceiver().getId() == null) {
+            delivery.setReceiver(this.addressService.createOrFind(delivery.getReceiver()));
         }
         return delivery;
     }

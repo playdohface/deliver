@@ -3,11 +3,13 @@ package com.karlerikenkelmann.deliver.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class TransitLog {
     public TransitLog(@NotNull Delivery delivery, String message) {
         this.delivery = delivery;

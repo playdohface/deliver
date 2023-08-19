@@ -32,18 +32,16 @@ class AddressServiceTest {
         this.testAddr1.setFirstName("Test");
         this.testAddr1.setLastName("Test");
         this.testAddr1.setStreet("Foo");
-        this.testAddr1.setStreetNumber("1");
         this.testAddr1.setCity("New York");
-        this.testAddr1.setPostCode("1111");
+        this.testAddr1.setPostalCode("1111");
         this.testAddr1.setCountry(Country.ARGENTINA);
 
         this.testAddr2 = new Address();
         this.testAddr2.setFirstName("Test");
         this.testAddr2.setLastName("Test");
         this.testAddr2.setStreet("Foo");
-        this.testAddr2.setStreetNumber("1");
         this.testAddr2.setCity("New York");
-        this.testAddr2.setPostCode("1111");
+        this.testAddr2.setPostalCode("1111");
         this.testAddr2.setCountry(Country.ARGENTINA);
     }
 

@@ -1,0 +1,75 @@
+<h1>Send Something!</h1>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  There has been an error :(
+</div>
+<div *ngIf="success" class="alert alert-success" role="alert">
+  <p>We have received your delivery!<br>
+    Please remember your tracking number:</p> <h2>{{success.id}}</h2>.
+  <p>Drop off your package at <strong>{{success.transitLocation.description}}</strong></p>
+</div>
+<form (ngSubmit)="submit()" [formGroup]="deliveryForm" ngNativeValidate>
+<fieldset [disabled]="success" formGroupName="sender">
+<legend>Sender</legend>
+  <div class="input-group">
+    <span class="input-group-text">First and last name</span>
+    <input required formControlName="firstName" placeholder="First Name" type="text" aria-label="First name" class="form-control">
+    <input required formControlName="lastName" placeholder="Last Name" type="text" aria-label="Last name" class="form-control">
+  </div>
+  <div class="input-group">
+    <span class="input-group-text">Street and Number</span>
+    <input required formControlName="street" placeholder="My Street 1" type="text" aria-label="Street" class="form-control">
+  </div>
+  <div class="input-group">
+    <span class="input-group-text">Extras</span>
+    <input autocomplete="address-line2" formControlName="addressExtras" placeholder="PO Box/CC (optional)" type="text" aria-label="Street" class="form-control">
+  </div>
+  <div class="input-group">
+    <span class="input-group-text">Post Code and City</span>
+    <input required autocomplete="postal-code" formControlName="postalCode" placeholder="12345" type="text" aria-label="Post Code" class="form-control">
+    <input required formControlName="city" placeholder="City" type="text" aria-label="City" class="form-control">
+  </div>
+  <div class="input-group">
+    <span class="input-group-text">Country</span>
+  <select formControlName="country" class="form-select" aria-label="Default select example">
+    <option disabled selected>Select a country</option>
+    <option *ngFor="let country of countryOptions"  [value]="country.value">{{country.displayName}}</option>
+  </select>
+  </div>
+</fieldset>
+  <fieldset [disabled]="success" formGroupName="receiver">
+    <legend>Recipient</legend>
+    <div class="input-group">
+      <span class="input-group-text">First and last name</span>
+      <input required formControlName="firstName" placeholder="First Name" type="text" aria-label="First name" class="form-control">
+      <input required formControlName="lastName" placeholder="Last Name" type="text" aria-label="Last name" class="form-control">
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">Street and Number</span>
+      <input required formControlName="street" placeholder="My Street 1" type="text" aria-label="Street" class="form-control">
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">Extras</span>
+      <input autocomplete="address-line2" formControlName="addressExtras" placeholder="PO Box/CC (optional)" type="text" aria-label="Street" class="form-control">
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">Post Code and City</span>
+      <input required autocomplete="postal-code" formControlName="postalCode" placeholder="12345" type="text" aria-label="Post Code" class="form-control">
+      <input required formControlName="city" placeholder="City" type="text" aria-label="City" class="form-control">
+    </div>
+    <div class="input-group">
+      <span class="input-group-text">Country</span>
+      <select formControlName="country" class="form-select" aria-label="Default select example">
+        <option disabled selected>Select a country</option>
+        <option *ngFor="let country of countryOptions"  [value]="country.value">{{country.displayName}}</option>
+      </select>
+    </div>
+  </fieldset>
+ <fieldset [disabled]="success">
+   <legend>Drop-Off Location</legend>
+  <select required id="dropOff" formControlName="dropOffId"  class="form-select" aria-label="Default select example">
+    <option disabled selected>Select a Drop-Off location</option>
+    <option *ngFor="let dropOff of dropOffOptions"  [value]="dropOff.id">{{dropOff.description}}</option>
+  </select>
+ </fieldset>
+  <button *ngIf="!success" type="submit" class="btn btn-lg btn-primary">Send</button>
+</form>

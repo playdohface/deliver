@@ -26,13 +26,10 @@ public class Address {
     @NotNull
     private String street;
 
-    @NotNull
-    private String streetNumber;
-
     private String addressExtras;
 
     @NotNull
-    private String postCode;
+    private String postalCode;
     @NotNull
     private String city;
     @NotNull
