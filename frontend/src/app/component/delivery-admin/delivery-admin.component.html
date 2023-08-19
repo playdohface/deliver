@@ -1,0 +1,20 @@
+<h1>Handle this Delivery</h1>
+
+<div *ngIf="delivery">
+  <button (click)="confirmDropOff()" *ngIf="delivery.status=='PENDING'" class="btn btn-success m-3">Confirm Drop-Off</button>
+<div class="container"*ngIf="delivery.status =='TRANSIT'">
+
+  <select required class="form-select" #transitOption>
+    <option selected disabled>-- Select a Transit Location --</option>
+    <option *ngFor="let transit of transitOptions" [value]="transit.id">{{transit.description}}</option>
+  </select>
+  <button class="btn btn-primary m-3" (click)="transit(transitOption.value)">Confirm Transit</button>
+  <button class="btn btn-success m-3" (click)="deliver()">Confirm Delivery</button>
+  <button class="btn btn-danger m-3" (click)="cancel()">Cancel Delivery</button>
+
+</div>
+
+</div>
+<h2>Selected Delivery</h2>
+<a [routerLink]="['/admin']" class="btn btn-outline-primary m-3">Go Back</a>
+<app-delivery-details *ngIf="delivery" [delivery]="delivery"></app-delivery-details>

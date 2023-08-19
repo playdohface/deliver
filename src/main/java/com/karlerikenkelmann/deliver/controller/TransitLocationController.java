@@ -23,4 +23,9 @@ public class TransitLocationController {
         return ResponseEntity.ok(this.transitLocationRepository.findDropOffLocations());
     }
 
+    @GetMapping
+    ResponseEntity<List<TransitLocation>> findAll() {
+        return ResponseEntity.ok(transitLocationRepository.findAll());
+    }
+
 }

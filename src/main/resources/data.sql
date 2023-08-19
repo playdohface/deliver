@@ -1,5 +1,6 @@
 INSERT INTO transit_location (description, is_drop_off) VALUES
-        ('At the receivers address (delivered)', false),
+        ('Delivered', false),
+        ('Canceled', false),
         ('In our Headquarters in Frankfurt', true),
         ('In a Truck on the Autobahn', false),
         ('On a boat on the atlantic ocean', false),

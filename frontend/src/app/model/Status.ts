@@ -1,6 +1,6 @@
 export enum Status {
-  PENDING = "Pending",
-  TRANSIT = "Transit",
-  CANCELED = "Canceled",
-  DELIVERED = "Delivered"
+  PENDING = "PENDING",
+  TRANSIT = "TRANSIT",
+  CANCELED = "CANCELED",
+  DELIVERED = "DELIVERED"
 }

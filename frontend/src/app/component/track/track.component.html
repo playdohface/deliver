@@ -1,3 +1,15 @@
-<p>track works!</p>
-<app-delivery-details [delivery]="delivery"></app-delivery-details>
+<h1>Track a delivery</h1>
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  {{error}}
+</div>
+<app-delivery-details *ngIf="delivery" [delivery]="delivery"></app-delivery-details>
+<button *ngIf="delivery" class = "btn btn-outline-secondary m-3" (click)="delivery = null">Track another delivery</button>
+<form *ngIf="!delivery" [formGroup]="form" (ngSubmit)="submit()" ngNativeValidate>
+  <label for="tracking">Your Tracking number</label>
+  <input formControlName="id" required minlength="7" class="form-control form-control-lg m-3" id="tracking" type="text" placeholder="Enter your tracking number">
+
+  <label for="verification">For verification, please enter the <strong>recipients last name</strong>, capitalization is not important</label>
+  <input formControlName="lastName" required class="form-control form-control-lg m-3" id="verification" type="text" placeholder="Enter the recipients last name">
+  <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-primary m-3">Track my delivery!</button>
+</form>
 

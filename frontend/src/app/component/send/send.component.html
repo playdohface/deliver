@@ -1,4 +1,4 @@
-<h1>Send Something!</h1>
+<h1>Send Something</h1>
 <div *ngIf="error" class="alert alert-danger" role="alert">
   There has been an error :(
 </div>
@@ -8,27 +8,27 @@
   <p>Drop off your package at <strong>{{success.transitLocation.description}}</strong></p>
 </div>
 <form (ngSubmit)="submit()" [formGroup]="deliveryForm" ngNativeValidate>
-<fieldset [disabled]="success" formGroupName="sender">
-<legend>Sender</legend>
-  <div class="input-group">
+<fieldset [disabled]="success" formGroupName="sender" class="mt-3">
+<legend>Who is sending?</legend>
+  <div class="input-group m-1">
     <span class="input-group-text">First and last name</span>
     <input required formControlName="firstName" placeholder="First Name" type="text" aria-label="First name" class="form-control">
     <input required formControlName="lastName" placeholder="Last Name" type="text" aria-label="Last name" class="form-control">
   </div>
-  <div class="input-group">
+  <div class="input-group m-1">
     <span class="input-group-text">Street and Number</span>
     <input required formControlName="street" placeholder="My Street 1" type="text" aria-label="Street" class="form-control">
   </div>
-  <div class="input-group">
+  <div class="input-group m-1">
     <span class="input-group-text">Extras</span>
     <input autocomplete="address-line2" formControlName="addressExtras" placeholder="PO Box/CC (optional)" type="text" aria-label="Street" class="form-control">
   </div>
-  <div class="input-group">
+  <div class="input-group m-1">
     <span class="input-group-text">Post Code and City</span>
     <input required autocomplete="postal-code" formControlName="postalCode" placeholder="12345" type="text" aria-label="Post Code" class="form-control">
     <input required formControlName="city" placeholder="City" type="text" aria-label="City" class="form-control">
   </div>
-  <div class="input-group">
+  <div class="input-group m-1">
     <span class="input-group-text">Country</span>
   <select formControlName="country" class="form-select" aria-label="Default select example">
     <option disabled selected>Select a country</option>
@@ -36,27 +36,27 @@
   </select>
   </div>
 </fieldset>
-  <fieldset [disabled]="success" formGroupName="receiver">
-    <legend>Recipient</legend>
-    <div class="input-group">
+  <fieldset class="mt-3" [disabled]="success" formGroupName="receiver">
+    <legend>To whom shall we deliver?</legend>
+    <div class="input-group m-1">
       <span class="input-group-text">First and last name</span>
       <input required formControlName="firstName" placeholder="First Name" type="text" aria-label="First name" class="form-control">
       <input required formControlName="lastName" placeholder="Last Name" type="text" aria-label="Last name" class="form-control">
     </div>
-    <div class="input-group">
+    <div class="input-group m-1">
       <span class="input-group-text">Street and Number</span>
       <input required formControlName="street" placeholder="My Street 1" type="text" aria-label="Street" class="form-control">
     </div>
-    <div class="input-group">
+    <div class="input-group m-1">
       <span class="input-group-text">Extras</span>
       <input autocomplete="address-line2" formControlName="addressExtras" placeholder="PO Box/CC (optional)" type="text" aria-label="Street" class="form-control">
     </div>
-    <div class="input-group">
+    <div class="input-group m-1">
       <span class="input-group-text">Post Code and City</span>
       <input required autocomplete="postal-code" formControlName="postalCode" placeholder="12345" type="text" aria-label="Post Code" class="form-control">
       <input required formControlName="city" placeholder="City" type="text" aria-label="City" class="form-control">
     </div>
-    <div class="input-group">
+    <div class="input-group m-1">
       <span class="input-group-text">Country</span>
       <select formControlName="country" class="form-select" aria-label="Default select example">
         <option disabled selected>Select a country</option>
@@ -64,12 +64,12 @@
       </select>
     </div>
   </fieldset>
- <fieldset [disabled]="success">
-   <legend>Drop-Off Location</legend>
+ <fieldset  class="mt-3" [disabled]="success">
+   <legend>Pick a Drop-Off Location</legend>
   <select required id="dropOff" formControlName="dropOffId"  class="form-select" aria-label="Default select example">
     <option disabled selected>Select a Drop-Off location</option>
     <option *ngFor="let dropOff of dropOffOptions"  [value]="dropOff.id">{{dropOff.description}}</option>
   </select>
  </fieldset>
-  <button *ngIf="!success" type="submit" class="btn btn-lg btn-primary">Send</button>
+  <button *ngIf="!success" type="submit" class="btn btn-lg btn-primary m-3">Send!</button>
 </form>

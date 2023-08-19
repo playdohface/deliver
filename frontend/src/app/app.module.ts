@@ -11,6 +11,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { AddressViewComponent } from './component/address-view/address-view.component';
 import { DeliveryDetailsComponent } from './component/delivery-details/delivery-details.component';
+import { DeliveryListComponent } from './component/delivery-list/delivery-list.component';
+import { DeliveryAdminComponent } from './component/delivery-admin/delivery-admin.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { DeliveryDetailsComponent } from './component/delivery-details/delivery-
     TrackComponent,
     AdminComponent,
     AddressViewComponent,
-    DeliveryDetailsComponent
+    DeliveryDetailsComponent,
+    DeliveryListComponent,
+    DeliveryAdminComponent
   ],
   imports: [
     BrowserModule,

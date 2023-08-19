@@ -1,0 +1,23 @@
+<p>delivery-list works!</p>
+<table class="table">
+  <thead>
+  <tr >
+    <th scope="col">#</th>
+    <th scope="col">From</th>
+    <th scope="col">To</th>
+    <th scope="col">Status</th>
+    <th scope="col">Location</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let delivery of deliveries">
+    <th scope="row">{{delivery.id}}</th>
+    <td>{{delivery.sender.firstName}} {{delivery.sender.lastName}}</td>
+    <td>{{delivery.receiver.firstName}}  {{delivery.receiver.lastName}}</td>
+    <td>{{delivery.status}}</td>
+    <td>{{delivery.transitLocation.description}}</td>
+    <td><a class="btn btn-outline-dark" [routerLink]="['/admin', delivery.id]">Edit</a></td>
+  </tr>
+  </tbody>
+</table>

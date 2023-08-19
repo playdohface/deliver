@@ -14,4 +14,8 @@ export class TransitLocationService {
   getDropOffStations():Observable<TransitLocation[]> {
     return this.http.get<TransitLocation[]>(`${this.backendUrl}/dropoff`);
   }
+
+  findAll() {
+    return this.http.get<TransitLocation[]>(`${this.backendUrl}`);
+  }
 }

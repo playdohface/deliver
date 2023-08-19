@@ -48,12 +48,19 @@ public class DeliveryService {
         return this.deliveryRepository.save(resolveAddresses(delivery));
     }
 
-    public void deliver(Integer id) {
-        this.deliveryRepository.findById(id)
-                .ifPresent(delivery -> {
-                    delivery.setStatus(DeliveryStatus.DELIVERED);
-                    deliveryRepository.save(delivery);
-                });
+    public Delivery handle(Delivery delivery,
+                                     DeliveryStatus newStatus,
+                                     TransitLocation newLocation,
+                                     String logMessage) {
+        delivery.setTransitLocation(newLocation);
+        delivery.setStatus(newStatus);
+        String message = logMessage;
+        if (logMessage.length() < 1) {
+            message = newStatus + " Location: " + newLocation.getDescription();
+        }
+        this.transitLogService.log(delivery,message);
+        return this.deliveryRepository.save(delivery);
+
     }
 
     public Optional<Delivery> createFromReq(DeliveryRequest deliveryRequest) {

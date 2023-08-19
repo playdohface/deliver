@@ -2,6 +2,12 @@
 
 <h2>Delivery No. {{delivery.id}}</h2>
 <h3>Status: {{delivery.status}}</h3>
+  <div *ngIf="delivery.status === Status.PENDING">
+   Awaiting Drop-Off at {{delivery.transitLocation.description}}.
+  </div>
+  <div *ngIf="delivery.status === Status.TRANSIT">
+    Current location: {{delivery.transitLocation.description}}
+  </div>
 <h3>History</h3>
 <div *ngFor="let log of delivery.logs">
   {{log.message}} - {{log.time | date:"medium"}}
