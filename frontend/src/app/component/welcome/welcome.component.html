@@ -1,0 +1,9 @@
+<h1>Deliver</h1>
+<h2>What is this?</h2>
+<p>This is a simple Application to demonstrate a Rest-service, and a frontend that uses it, which is what you're looking at. The chosen domain is that of sending packages - hence the name. To test the functionality, <a [routerLink]="'/send'">Send something</a>, simulate moving the delivery along with the <a [routerLink]="'/admin'">Admin-Panel</a> and <a [routerLink]="'track'">track</a> your delivery.</p>
+<h2>API Docs</h2>
+<p>The API is tersely documented <a [routerLink]="'/api/docs'">here</a>. </p>
+<h3>Rest? <small class="text-body-secondary">A quick disclaimer for people who read research papers</small></h3>
+<p><strong>Re</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer is a term coined by Roy Fielding in his doctoral dissertation and refers to a systems architecture for network applications. However, the terms REST and RESTful are colloquially used to describe JSON-APIs consumed by (single-page) frontend web applications. Ironically, these types of applications usually violate one of the core tenets of the REST architecture as envisioned by Fielding: they generally do not have a uniform interface as prescribed by REST. The user of a JSON-API generally needs at least some out-of-band information (the API-docs) in order to discover available resources and know how to interact with them, which is not part of the application interface itself. </p>
+<p>That being said, this Pseudo-RESTful architecture has turned out to be a very powerful and flexible way of building web apps, and has become the de-facto standard, extremely well supported by modern tooling. It is a reasonable compromise of doing things right and getting things done, with a slight tendency towards the latter.
+This is an example of such an app.</p>

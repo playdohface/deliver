@@ -31,7 +31,6 @@ export class TrackComponent {
     this.deliveryService.track(id, lastName).subscribe({
       next : res => {
         this.delivery = res;
-      console.log(res);
     },
       error : err => {
         console.log("status: ",err.status);

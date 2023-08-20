@@ -1,7 +1,6 @@
 package com.karlerikenkelmann.deliver.model;
 
 import com.karlerikenkelmann.deliver.entity.Address;
-import com.karlerikenkelmann.deliver.entity.TransitLocation;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

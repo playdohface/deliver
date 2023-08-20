@@ -13,6 +13,9 @@ import { AddressViewComponent } from './component/address-view/address-view.comp
 import { DeliveryDetailsComponent } from './component/delivery-details/delivery-details.component';
 import { DeliveryListComponent } from './component/delivery-list/delivery-list.component';
 import { DeliveryAdminComponent } from './component/delivery-admin/delivery-admin.component';
+import { ErrorComponent } from './component/error/error.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
+import { ApiDocsComponent } from './component/api-docs/api-docs.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { DeliveryAdminComponent } from './component/delivery-admin/delivery-admi
     AddressViewComponent,
     DeliveryDetailsComponent,
     DeliveryListComponent,
-    DeliveryAdminComponent
+    DeliveryAdminComponent,
+    ErrorComponent,
+    WelcomeComponent,
+    ApiDocsComponent
   ],
   imports: [
     BrowserModule,

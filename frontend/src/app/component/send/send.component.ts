@@ -54,7 +54,6 @@ export class SendComponent {
   submit() {
     this.deliveryService.send(this.deliveryForm.value).subscribe(d => {
       this.success = d;
-      console.log(d);
     });
   }
 

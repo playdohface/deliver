@@ -1,0 +1,72 @@
+<h2>The API</h2>
+<h3>Endpoints</h3>
+<ul class="list-group">
+  <li class="list-group-item"><strong>GET /api/deliver</strong><br>
+    returns 200 Delivery[] with all Deliveries</li>
+  <li class="list-group-item"><strong>GET /api/deliver/[id]?lastName=[lastname]</strong> <br>
+    returns 200 Delivery<br>
+    id is the entity id, equal to the tracking code, lastName is the last name of the recipient that must match</li>
+  <li class="list-group-item"><strong>POST /api/deliver</strong><br>
+    returns 200 Delivery<br>
+    With a request-body of type DeliveryRequest</li>
+  <li class="list-group-item"><strong>PUT /api/deliver</strong><br>
+    returns 200 Delivery<br>
+    With a request-body of type Delivery</li>
+  <li class="list-group-item"><strong>GET /api/transitlocation</strong><br>
+  returns 200 TransitLocation[] with all available locations
+  </li>
+  <li class="list-group-item"><strong>GET /api/transitlocation/dropoff</strong><br>
+    returns 200 TransitLocation[] with all locations marked as dropOff
+  </li>
+  <li class="list-group-item"><strong>GET /api/deliver/admin/[id]</strong><br>
+    returns 200 Delivery<br>
+    same as /api/deliver/[id] but without the check, /admin would be a protected route in production.</li>
+  <li class="list-group-item"><strong>PATCH /api/admin/[id]?status=[DeliveryStatus]&locationId=[id]&message=[string?]</strong>
+  <br>
+    returns 200 Delivery<br>
+    locationId must be an existing id of a TransitLocation<br>
+    message is optional and replaces the automatic log message if set
+  </li>
+</ul>
+<h3 class="mt-3">Types</h3>
+<pre>{{'Delivery {\n' +
+'  sender: Address,\n' +
+'  receiver: Address,\n' +
+'  createdAt: string|Date,\n' +
+'  logs?: Log[],\n' +
+'  transitLocation: TransitLocation,\n' +
+'  status: Status,\n' +
+'  id: number\n' +
+'}'}}</pre>
+<pre>{{'DeliveryRequest {\n' +
+'  sender: Address,\n' +
+'  receiver: Address,\n' +
+'  dropOffId: number\n' +
+'}'}}</pre>
+<pre>{{'Address {\n' +
+'  id?: number,\n' +
+'  firstName: string,\n' +
+'  lastName: string,\n' +
+'  street: string,\n' +
+'  addressExtras?: string,\n' +
+'  postalCode: string,\n' +
+'  city: string,\n' +
+'  country: string\n' +
+'}'}}</pre>
+<pre>{{'TransitLocation {\n' +
+'  id?: number,\n' +
+'  address?: Address,\n' +
+'  description: string,\n' +
+'  dropOff: boolean\n' +
+'}'}}</pre>
+<pre>{{'enum Status {\n' +
+'  PENDING = "PENDING",\n' +
+'  TRANSIT = "TRANSIT",\n' +
+'  CANCELED = "CANCELED",\n' +
+'  DELIVERED = "DELIVERED"\n' +
+'}'}}</pre>
+<pre>{{'Log {\n' +
+'  time: Date|string;\n' +
+'  message: string,\n' +
+'  id: number\n' +
+'}'}}</pre>

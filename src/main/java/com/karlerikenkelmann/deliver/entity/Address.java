@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.Locale;
 
 @Entity
 @Data

@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 public class TransitLogService {
     private TransitLogRepository transitLogRepository;
 
-    TransitLog deliveryCreation(Delivery delivery) {
+    void deliveryCreation(Delivery delivery) {
         var tl = new TransitLog(delivery, "Request received");
-        return transitLogRepository.save(tl);
+        transitLogRepository.save(tl);
     }
 
-    TransitLog log(Delivery delivery, String message) {
-        return transitLogRepository.save(new TransitLog(delivery, message));
+    void log(Delivery delivery, String message) {
+        transitLogRepository.save(new TransitLog(delivery, message));
     }
 }

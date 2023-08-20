@@ -33,17 +33,6 @@ public class DeliveryService {
         return this.deliveryRepository.findById(id);
     }
 
-    public Optional<Delivery> checkIn(Integer deliveryId, TransitLocation location, String message) {
-        var found = deliveryRepository.findById(deliveryId);
-        if (found.isEmpty()) {
-            return found;
-        }
-        var delivery = found.get();
-        delivery.setTransitLocation(location);
-        transitLogService.log(delivery, message);
-        return Optional.of(deliveryRepository.save(delivery));
-    }
-
     public Delivery update(Delivery delivery) {
         return this.deliveryRepository.save(resolveAddresses(delivery));
     }
@@ -55,7 +44,7 @@ public class DeliveryService {
         delivery.setTransitLocation(newLocation);
         delivery.setStatus(newStatus);
         String message = logMessage;
-        if (logMessage.length() < 1) {
+        if (logMessage.length() < 1 || logMessage.equals("auto")) {
             message = newStatus + " Location: " + newLocation.getDescription();
         }
         this.transitLogService.log(delivery,message);
@@ -69,12 +58,11 @@ public class DeliveryService {
             return Optional.empty();
         }
         var drop = dropOff.get();
-        var delivery = new Delivery();
-        delivery.setSender(deliveryRequest.getSender());
-        delivery.setReceiver(deliveryRequest.getReceiver());
-        delivery.setStatus(DeliveryStatus.PENDING);
-        delivery.setTransitLocation(drop);
-        delivery.setCreatedAt(LocalDateTime.now());
+        var delivery = new Delivery(
+                deliveryRequest.getSender(),
+                deliveryRequest.getReceiver(),
+                DeliveryStatus.PENDING,
+                drop);
         var saved = deliveryRepository.save(resolveAddresses(delivery));
         transitLogService.deliveryCreation(saved);
         return Optional.of(saved);

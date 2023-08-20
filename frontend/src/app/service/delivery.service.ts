@@ -13,7 +13,6 @@ export class DeliveryService {
   constructor(private http:HttpClient) { }
 
   send(deliveryRequest: DeliveryRequest) {
-    console.log(deliveryRequest)
     return this.http.post<Delivery>(`${this.backendUrl}`, deliveryRequest);
   }
 

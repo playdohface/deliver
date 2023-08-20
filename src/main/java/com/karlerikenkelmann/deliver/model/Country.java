@@ -20,7 +20,7 @@ public enum Country {
     UNITED_KINGDOM("United Kingdom");
 
 
-    private String country;
+    private final String country;
 
     Country(String country) {
         this.country = country;
